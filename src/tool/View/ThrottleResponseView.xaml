@@ -17,7 +17,7 @@
 			<RadioButton Content="Linear" Margin="5" IsChecked="{Binding IsLinearChecked}" Grid.Row="0" VerticalAlignment="Center" />
 			<RadioButton Content="Quadratic" Margin="5" IsChecked="{Binding IsQuadraticChecked}" Grid.Row="1" VerticalAlignment="Center" />
 			<Label Content="Quadratic Factor" Margin="0,-1,0,0" Grid.Row="0" VerticalAlignment="Center" />
-			<TextBox Text="{Binding QuadraticFactor, UpdateSourceTrigger=PropertyChanged}" Padding="2" Grid.Row="2" VerticalAlignment="Center" IsEnabled="{Binding IsQuadraticChecked}" MinWidth="50" />
+			<TextBox Text="{Binding ConfigVm.QuadraticFactor,  UpdateSourceTrigger=LostFocus}" Padding="2" Grid.Row="2" VerticalAlignment="Center" IsEnabled="{Binding IsQuadraticChecked}" MinWidth="50" />
 		</StackPanel>
 
         <oxy:PlotView Grid.Row="1" Model="{Binding PlotModel}" />

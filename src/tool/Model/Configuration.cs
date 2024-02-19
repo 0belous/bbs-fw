@@ -187,7 +187,7 @@ namespace BBSFW.Model
 		public uint ThrottleStartMillivolts;
 		public uint ThrottleEndMillivolts;
 		public uint ThrottleStartPercent;
-		public float QuadraticFactor;
+		public double QuadraticFactor;
 		public ThrottleGlobalSpeedLimitOptions ThrottleGlobalSpeedLimit;
 		public uint ThrottleGlobalSpeedLimitPercent;
 

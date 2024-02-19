@@ -173,7 +173,7 @@ namespace BBSFW.ViewModel
 			}
 		}
 
-		public float QuadraticFactor
+		public double QuadraticFactor
 		{
 			get { return _config.QuadraticFactor; }
 			set

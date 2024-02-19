@@ -4,6 +4,7 @@ using OxyPlot.Series;
 using OxyPlot.Axes;
 using System.Collections.Generic;
 using System;
+using System.ComponentModel;
 
 namespace BBSFW.ViewModel
 {
@@ -44,20 +45,6 @@ namespace BBSFW.ViewModel
 			}
 		}
 
-		private string _quadraticFactor;
-		public string QuadraticFactor
-		{
-			get { return _quadraticFactor; }
-			set
-			{
-				if (_quadraticFactor != value)
-				{
-					_quadraticFactor = value;
-					OnPropertyChanged(nameof(QuadraticFactor));
-				}
-			}
-		}
-
 		private PlotModel _plotModel;
 		public PlotModel PlotModel
 		{
@@ -71,24 +58,36 @@ namespace BBSFW.ViewModel
 				}
 			}
 		}
+
+		private void ConfigVm_PropertyChanged(object sender, PropertyChangedEventArgs e)
+		{
+			if (e.PropertyName == nameof(ConfigurationViewModel.QuadraticFactor))
+			{
+				// The QuadraticFactor property has changed, update your graph here
+				// You can access the new value with _configVm.QuadraticFactor
+				UpdateGraphData();
+			}
+		}
+
 		public ThrottleResponseViewModel(ConfigurationViewModel config)
 		{
 			_configVm = config;
 
+			_configVm.PropertyChanged += ConfigVm_PropertyChanged;
+
 			// Initialize the PlotModel with default values
 			IsLinearChecked = true;
-			QuadraticFactor = "1.5";
 			PlotModel = new PlotModel { Title = "Throttle Response" };
-			PlotModel.Axes.Add(new LinearAxis { Position = AxisPosition.Bottom, Title = "Throttle Position", IsPanEnabled = false });
-			PlotModel.Axes.Add(new LinearAxis { Position = AxisPosition.Left, Title = "Power Output", IsPanEnabled = false  });
+			PlotModel.Axes.Add(new LinearAxis { Position = AxisPosition.Bottom, Title = "Throttle Position", IsPanEnabled = false, IsZoomEnabled = false });
+			PlotModel.Axes.Add(new LinearAxis { Position = AxisPosition.Left, Title = "Power Output", IsPanEnabled = false, IsZoomEnabled = false });
 
 			// Render graph initially
 			UpdateGraphData();
 
-			// Update the graph data whenever IsLinearChecked, IsQuadraticChecked, or QuadraticFactor changes
+
 			PropertyChanged += (sender, e) =>
 			{
-				if (e.PropertyName == nameof(IsLinearChecked) || e.PropertyName == nameof(IsQuadraticChecked) || e.PropertyName == nameof(QuadraticFactor))
+				if (e.PropertyName == nameof(IsLinearChecked) || e.PropertyName == nameof(IsQuadraticChecked) || e.PropertyName == nameof(_configVm.QuadraticFactor))
 				{
 					UpdateGraphData();
 				}
@@ -98,8 +97,6 @@ namespace BBSFW.ViewModel
 		private void UpdateGraphData()
 		{
 			PlotModel.Series.Clear();
-
-			_configVm.QuadraticFactor = float.Parse(QuadraticFactor);
 
 			var series = new LineSeries
 			{
@@ -113,9 +110,9 @@ namespace BBSFW.ViewModel
 				{
 					powerOutput = i; // linear relationship
 				}
-				else if (IsQuadraticChecked && QuadraticFactor != null)
+				else if (IsQuadraticChecked)
 				{
-					double quadraticFactor = double.Parse(QuadraticFactor);
+					double quadraticFactor = double.Parse(_configVm.QuadraticFactor.ToString());
 					powerOutput = Math.Pow(i / 100.0, quadraticFactor) * 100; // quadratic relationship
 				}
 				series.Points.Add(new DataPoint(i, powerOutput));
