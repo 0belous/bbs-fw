@@ -187,6 +187,7 @@ namespace BBSFW.Model
 		public uint ThrottleStartMillivolts;
 		public uint ThrottleEndMillivolts;
 		public uint ThrottleStartPercent;
+		public float QuadraticFactor;
 		public ThrottleGlobalSpeedLimitOptions ThrottleGlobalSpeedLimit;
 		public uint ThrottleGlobalSpeedLimitPercent;
 
@@ -216,6 +217,7 @@ namespace BBSFW.Model
 			MaxCurrentAmps = 0;
 			CurrentRampAmpsSecond = 0;
 			MaxBatteryVolts = 0;
+			QuadraticFactor = 0;
 			LowCutoffVolts = 0;
 
 			UseSpeedSensor = false;
@@ -295,6 +297,7 @@ namespace BBSFW.Model
 				UseFreedomUnits = br.ReadBoolean();
 
 				MaxCurrentAmps = br.ReadByte();
+				QuadraticFactor = br.ReadByte();
 				CurrentRampAmpsSecond = br.ReadByte();
 				LowCutoffVolts = br.ReadByte();
 				MaxSpeedKph = br.ReadByte();
@@ -367,6 +370,7 @@ namespace BBSFW.Model
 				MaxCurrentAmps = br.ReadByte();
 				CurrentRampAmpsSecond = br.ReadByte();
 				MaxBatteryVolts = br.ReadUInt16() / 100f;
+				QuadraticFactor = br.ReadUInt16() / 100f;
 				LowCutoffVolts = br.ReadByte();
 				MaxSpeedKph = br.ReadByte();
 
@@ -440,6 +444,7 @@ namespace BBSFW.Model
 				MaxCurrentAmps = br.ReadByte();
 				CurrentRampAmpsSecond = br.ReadByte();
 				MaxBatteryVolts = br.ReadUInt16() / 100f;
+				QuadraticFactor = br.ReadUInt16() / 100f;
 				LowCutoffVolts = br.ReadByte();
 				MaxSpeedKph = br.ReadByte();
 
@@ -513,6 +518,7 @@ namespace BBSFW.Model
 				MaxCurrentAmps = br.ReadByte();
 				CurrentRampAmpsSecond = br.ReadByte();
 				MaxBatteryVolts = br.ReadUInt16() / 100f;
+				QuadraticFactor = br.ReadUInt16() / 100f;
 				LowCutoffVolts = br.ReadByte();
 				MaxSpeedKph = br.ReadByte();
 
@@ -581,6 +587,7 @@ namespace BBSFW.Model
 				bw.Write((byte)MaxCurrentAmps);
 				bw.Write((byte)CurrentRampAmpsSecond);
 				bw.Write((UInt16)(MaxBatteryVolts * 100));
+				bw.Write((UInt16)(QuadraticFactor * 100));
 				bw.Write((byte)LowCutoffVolts);
 				bw.Write((byte)MaxSpeedKph);
 
@@ -645,6 +652,7 @@ namespace BBSFW.Model
 			MaxCurrentAmps = cfg.MaxCurrentAmps;
 			CurrentRampAmpsSecond = cfg.CurrentRampAmpsSecond;
 			MaxBatteryVolts = cfg.MaxBatteryVolts;
+			QuadraticFactor = cfg.QuadraticFactor;
 			LowCutoffVolts = cfg.LowCutoffVolts;
 			UseSpeedSensor = cfg.UseSpeedSensor;
 			UseShiftSensor = cfg.UseShiftSensor;
@@ -716,6 +724,7 @@ namespace BBSFW.Model
 			ValidateLimits(MaxCurrentAmps, 5, MaxCurrentLimitAmps, "Max Current (A)");
 			ValidateLimits(CurrentRampAmpsSecond, 1, 255, "Current Ramp (A/s)");
 			ValidateLimits((uint)MaxBatteryVolts, 1, 100, "Max Battery Voltage (V)");
+			ValidateLimits((uint)QuadraticFactor, 0, 100, "Quadratic Factor");
 			ValidateLimits(LowCutoffVolts, 1, 100, "Low Voltage Cut Off (V)");
 
 			ValidateLimits((uint)WheelSizeInch, 10, 40, "Wheel Size (inch)");

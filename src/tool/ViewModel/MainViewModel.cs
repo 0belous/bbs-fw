@@ -20,6 +20,8 @@ namespace BBSFW.ViewModel
 
 		public AssistLevelsViewModel AssistLevelsVm { get; private set; }
 
+		public ThrottleResponseViewModel ThrottleResponseVm { get; private set; }
+
 		public CalibrationViewModel CalibrationVm { get; private set; }
 
 		public EventLogViewModel EventLogVm { get; private set; }
@@ -75,6 +77,7 @@ namespace BBSFW.ViewModel
 			ConnectionVm = new ConnectionViewModel();
 			SystemVm = new SystemViewModel(ConfigVm);
 			AssistLevelsVm = new AssistLevelsViewModel(ConfigVm);
+			ThrottleResponseVm = new ThrottleResponseViewModel(ConfigVm);
 			CalibrationVm = new CalibrationViewModel(ConnectionVm);
 			EventLogVm = new EventLogViewModel();
 

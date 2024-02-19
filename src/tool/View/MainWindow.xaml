@@ -20,7 +20,7 @@
 			<RowDefinition Height="Auto" />
 			<RowDefinition />
 		</Grid.RowDefinitions>
-		
+
 		<Menu Grid.Row="0">
 			<MenuItem Header="File" Height="22" VerticalContentAlignment="Center">
 				<MenuItem Header="Open..." Command="{Binding OpenConfigCommand}" />
@@ -57,6 +57,9 @@
 			<TabItem Header="Assist Levels">
 				<vw:AssistLevelsView Margin="10" DataContext="{Binding AssistLevelsVm}" />
 			</TabItem>
+			<TabItem Header="Throttle Response">
+				<vw:ThrottleResponseView Margin="10" DataContext="{Binding ThrottleResponseVm}" />
+			</TabItem>
 			<TabItem Header="Calibration" DataContext="{Binding CalibrationVm}">
 				<vw:CalibrationView Margin="10" />
 			</TabItem>
@@ -64,6 +67,6 @@
 				<vw:EventLogView Margin="10" />
 			</TabItem>
 		</TabControl>
-		
+
 	</Grid>
 </Window>

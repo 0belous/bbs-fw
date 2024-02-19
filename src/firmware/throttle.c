@@ -59,14 +59,14 @@ uint8_t throttle_read()
 	int16_t value = adc_get_throttle();
 
 #ifdef LOG_THROTTLE_ADC
-	static uint8_t last_logged_throttle_adc = 0;	
+	static uint8_t last_logged_throttle_adc = 0;
 	if (ABS(value - last_logged_throttle_adc) > 1)
 	{
 		last_logged_throttle_adc = value;
-		eventlog_write_data(EVT_DATA_THROTTLE_ADC, value);		
+		eventlog_write_data(EVT_DATA_THROTTLE_ADC, value);
 	}
 #endif
-	
+
 	if (value < THROTTLE_HARD_LOW_LIMIT_ADC || value > THROTTLE_HARD_HIGH_LIMIT_ADC)
 	{
 		// allow invalid throttle input value for a number of milliseconds before reporting throttle error.
@@ -82,7 +82,7 @@ uint8_t throttle_read()
 				{
 					eventlog_write(EVT_ERROR_THROTTLE_HIGH_LIMIT);
 				}
-				
+
 				throttle_hard_ok = false;
 			}
 		}

@@ -173,6 +173,19 @@ namespace BBSFW.ViewModel
 			}
 		}
 
+		public float QuadraticFactor
+		{
+			get { return _config.QuadraticFactor; }
+			set
+			{
+				if (_config.QuadraticFactor != value)
+				{
+					_config.QuadraticFactor = value;
+					OnPropertyChanged(nameof(QuadraticFactor));
+				}
+			}
+		}
+
 		public uint LowCutoffVolts
 		{
 			get { return _config.LowCutoffVolts; }
