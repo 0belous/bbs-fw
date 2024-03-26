@@ -13,9 +13,6 @@ using System.Windows.Shapes;
 
 namespace BBSFW.View
 {
-	/// <summary>
-	/// Interaction logic for ConnectionView.xaml
-	/// </summary>
 	public partial class ThrottleResponseView : UserControl
 	{
 		public ThrottleResponseView()

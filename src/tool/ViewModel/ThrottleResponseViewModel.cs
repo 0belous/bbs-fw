@@ -63,8 +63,6 @@ namespace BBSFW.ViewModel
 		{
 			if (e.PropertyName == nameof(ConfigurationViewModel.QuadraticFactor))
 			{
-				// The QuadraticFactor property has changed, update your graph here
-				// You can access the new value with _configVm.QuadraticFactor
 				UpdateGraphData();
 			}
 		}
@@ -84,11 +82,13 @@ namespace BBSFW.ViewModel
 			// Render graph initially
 			UpdateGraphData();
 
-
 			PropertyChanged += (sender, e) =>
 			{
 				if (e.PropertyName == nameof(IsLinearChecked) || e.PropertyName == nameof(IsQuadraticChecked) || e.PropertyName == nameof(_configVm.QuadraticFactor))
 				{
+					if (IsLinearChecked) {
+						_configVm.QuadraticFactor = 1;
+					}
 					UpdateGraphData();
 				}
 			};

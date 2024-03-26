@@ -23,7 +23,6 @@ static bool throttle_low_ok;
 static bool throttle_hard_ok;
 static uint32_t throttle_hard_limit_hit_at;
 
-
 //#define LOG_THROTTLE_ADC
 
 #define ADC_VOLTAGE_MV						5000ul
